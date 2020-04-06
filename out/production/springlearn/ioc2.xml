@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+        <!--实验4，正确的为各种属性赋值
+        测试使用null值-->
+    <bean id="car01" class="com.xc.Car">
+        <property name="carName" value="布加迪"></property>
+        <property name="color" value="black"></property>
+        <property name="price" value="10000000"></property>
+    </bean>
+    <bean id="person01" class="com.xc.Person">
+        <property name="lastname">
+            <null></null>
+        </property>
+        <!--ref,代表引用外面的一个值car=ioc.getBean("car01)-->
+        <!--<property name="car" ref="car01"></property>-->
+        <property name="car">
+            <!--引用内部bean-->
+            <bean class="com.xc.Car">
+                <property name="color" value="red"></property>
+                <property name="carName" value="benchi"></property>
+                <property name="price" value="200000"></property>
+            </bean>
+        </property>
+    </bean>
+    <bean id="book01" class="com.xc.Book">
+        <property name="author" value="罗贯中"></property>
+        <property name="bookName" value="三国演义"></property>
+    </bean>
+    <bean id="person02" class="com.xc.Person">
+        <!--如何为list类型赋值-->
+        <property name="books">
+            <!--books = new ArrayList<>()-->
+            <list>
+                <!--list标签中添加每一个元素,引用内部bean，不能被获取到，只能内部使用，不能通过getbean获取-->
+                <bean id="book000x" class="com.xc.Book" p:bookName="红楼梦"></bean>
+                <!--引用外部一个元素-->
+                <ref bean="book01"/>
+            </list>
+        </property>
+        <property name="maps">
+            <!--maps = new LinkedHashMap<>();-->
+            <map>
+                <!--一个entry代表一个键值对-->
+                <entry key="key01" value="zhangsan"></entry>
+                <entry key="key02" value-ref="book01"></entry>
+                <entry key="key03">
+                    <bean class="com.xc.Book">
+                        <property name="bookName" value="西游记"></property>
+                    </bean>
+                </entry>
+                <!--<entry key="key04">-->
+                    <!--<map></map>-->
+                <!--</entry>-->
+            </map>
+        </property>
+        <property name="properties">
+            <!--properties = new Properties();所有的k=v都是string值-->
+            <props>
+                <!--k=v都是string，直接卸载标签体中-->
+                <prop key="username">root</prop>
+                <prop key="password">123456</prop>
+            </props>
+        </property>
+    </bean>
+    <!--util名称空间创建集合类型的bean，方便别人引用-->
+    <bean id="person03" class="com.xc.Person">
+        <property name="maps" ref="myMap"></property>
+    </bean>
+    <!--相当于 new LinkedHashMap()-->
+    <util:map id="myMap">
+        <!--添加元素-->
+        <entry key="key01" value="zhangsan"></entry>
+        <entry key="key02" value-ref="book01"></entry>
+        <entry key="key03">
+            <bean class="com.xc.Book">
+                <property name="bookName" value="西游记"></property>
+            </bean>
+        </entry>
+    </util:map>
+    <bean id="person04" class="com.xc.Person">
+        <property name="car" ref="car01"></property>
+        <property name="car.price" value="15000000"></property>
+    </bean>
+    <!--实验6：通过继承实现bean配置信息的重用
+        实验7：通过abstract属性创建一个模板bean
+
+        实验9：测试bean的作用域，分别创建单实例和多实例的bean*-->
+    <!--这个bean是抽象的，只能被继承，不能获取-->
+    <bean id="person05" class="com.xc.Person" abstract="true">
+        <property name="lastname" value="tom"></property>
+        <property name="age" value="13"></property>
+        <property name="gender" value="m"></property>
+    </bean>
+    <!--parent，指定当前bean的配置信息继承于哪个-->
+    <bean id="person06" class="com.xc.Person" parent="person05">
+        <property name="lastname" value="jerry"></property>
+    </bean>
+</beans>
