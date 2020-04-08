@@ -26,6 +26,8 @@ public class Test {
     private ApplicationContext ioc = new ClassPathXmlApplicationContext("ioc.xml");
     private ApplicationContext ioc2 = new ClassPathXmlApplicationContext("ioc2.xml");
     private ApplicationContext ioc3 = new ClassPathXmlApplicationContext("ioc3.xml");
+
+
     /**
      * @author chosen1
      * FactoryBean

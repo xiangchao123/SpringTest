@@ -6,7 +6,12 @@ package com.xc;
 public class Book {
     private String author;
     private String bookName;
-
+    public void myInit(){
+        System.out.println("这是图书的初始化方法。。。");
+    }
+    public void myDestory(){
+        System.out.println("这是图书的销毁方法。。。");
+    }
     @Override
     public String toString() {
         return "Book{" +
