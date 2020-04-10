@@ -11,5 +11,7 @@
     <!--加载外部配置文件  固定写法classpath：，表示引用类路径下的一个资源-->
     <!--username是spring的key的一个关键字-->
 
+    <!--自动装配 autowire="default/no":不自动装配：不自动为car属性赋值-->
+
 
 </beans>

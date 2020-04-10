@@ -36,6 +36,7 @@ public class Test {
     public void test11(){
         Object myFactoryBeanImple = ioc3.getBean("myFactoryBeanImple");
         System.out.println(myFactoryBeanImple);
+        System.out.println(0<<1);
 
     }
     /**

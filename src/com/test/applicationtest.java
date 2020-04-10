@@ -9,7 +9,7 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
  * Created by xiangchao on 2020/4/8.
  */
 public class applicationtest {
-//    private ConfigurableApplicationContext ioc = new FileSystemXmlApplicationContext("F:\\springlearn\\src\\com\\conf\\applicationContext.xml");
+//    private ConfigurableApplicationContext ioc = new FileSystemXmlApplicationContext("F:\\springlearn\\src\\com\\conf\\applicationContext15.xml");
     private ApplicationContext ioc = new ClassPathXmlApplicationContext("applicationContext.xml");
     /**
      * @author chosen1
