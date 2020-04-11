@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+    <context:component-scan base-package="com.proxy"></context:component-scan>
+    <!--开启基于注解的aop功能，aop名称空间-->
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
+    <!--重要的用xml，不重要的用注解-->
+
+    <!--基于注解的AOP步骤：
+        1、将目标类和切面类都加入到ioc容器中@Component
+        2、告诉Spring那个是切面类@Aspect
+        3、5个通知注解
+        -->
+
+    <!--&lt;!&ndash;基于配置aop&ndash;&gt;-->
+    <!--<bean id="mathCalculator" class="com.proxy.MyMathCalculator"></bean>-->
+    <!--<bean id="logUtils2" class="com.proxy.LogUtils"></bean>-->
+    <!--&lt;!&ndash;需要aop名称空间&ndash;&gt;-->
+    <!--<aop:config>-->
+        <!--<aop:pointcut id="globalpoint" expression="execution(* com.proxy.MyMathCalculator.*(int,int))"></aop:pointcut>-->
+        <!--&lt;!&ndash;指定切面：@Aspect&ndash;&gt;-->
+        <!--<aop:aspect ref="logUtils2">-->
+            <!--&lt;!&ndash;当前切面内的&ndash;&gt;-->
+            <!--<aop:pointcut id="mypoint" expression="execution(* com.proxy.MyMathCalculator.*(int,int))"></aop:pointcut>-->
+            <!--<aop:before method="logStart" pointcut="execution(* com.proxy.MyMathCalculator.*(int,int))"></aop:before>-->
+            <!--<aop:after-returning method="logReturn" pointcut-ref="mypoint" returning="result"></aop:after-returning>-->
+            <!--<aop:after-throwing method="logException" pointcut-ref="globalpoint" throwing="e"></aop:after-throwing>-->
+            <!--<aop:after method="logEnd" pointcut-ref="mypoint"></aop:after>-->
+            <!--<aop:around method="myAround" pointcut-ref="mypoint"></aop:around>-->
+        <!--</aop:aspect>-->
+    <!--</aop:config>-->
+</beans>
